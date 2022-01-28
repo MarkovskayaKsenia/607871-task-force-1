@@ -1,6 +1,8 @@
 <?php
+
 use yii\helpers\Url;
 use App\Service\DataFormatter;
+use \yii\widgets\LinkPager;
 
 /**
  * @var \yii\data\ActiveDataProvider $dataProvider
@@ -14,9 +16,9 @@ use App\Service\DataFormatter;
             <div class="new-task__card">
                 <div class="new-task__title">
                     <a href="<?= Url::to(
-                    "/task/view/{$newTask->id}"); ?>" class="link-regular"><h2><?= $newTask->title; ?></h2></a>
+                        "/task/view/{$newTask->id}"); ?>" class="link-regular"><h2><?= $newTask->title; ?></h2></a>
                     <a class="new-task__type link-regular" href="<?= Url::to([
-                        '/tasks/index', "{$model->formName()}"=>
+                        '/tasks/index', "{$model->formName()}" =>
                             ['categories' => [$newTask->category->id],
                                 'noExecutor' => false
                             ]
@@ -34,15 +36,16 @@ use App\Service\DataFormatter;
         <?php endforeach; ?>
     </div>
     <div class="new-task__pagination">
-        <ul class="new-task__pagination-list">
-            <li class="pagination__item"><a href="#"></a></li>
-            <li class="pagination__item pagination__item--current">
-                <a>1</a></li>
-            <li class="pagination__item"><a href="#">2</a></li>
-            <li class="pagination__item"><a href="#">3</a></li>
-            <li class="pagination__item"><a href="#"></a></li>
-        </ul>
-    </div>
+        <?= LinkPager::widget([
+            'pagination' => $dataProvider->getPagination(),
+            'options' => ['class' => 'new-task__pagination-list'],
+            'activePageCssClass' => 'pagination__item--current',
+            'pageCssClass' => 'pagination__item',
+            'nextPageCssClass' => 'pagination__item',
+            'prevPageCssClass' => 'pagination__item',
+            'nextPageLabel' => '',
+            'prevPageLabel' => '',
+        ]); ?>
 </section>
 
 <?= Yii::$app->controller->renderPartial('/tasks/search-task', ['model' => $model]); ?>

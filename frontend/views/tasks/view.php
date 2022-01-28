@@ -60,7 +60,6 @@ YandexMapAsset::register($this);
                     <div class="content-view__address">
                         <span class="address__town"><?=$task->city->name ?? 'Город не определен'; ?></span><br>
                         <span><?= $task->address ?? 'Удаленная работа'; ?></span>
-                        <p>Вход под арку, код домофона 1122</p>
                     </div>
                 </div>
             </div>
@@ -128,10 +127,10 @@ YandexMapAsset::register($this);
             <a href="#" class="link-regular">Смотреть профиль</a>
         </div>
     </div>
+    <?php if(Yii::$app->user->id === $task->client_id || Yii::$app->user->id === $task->executor_id): ?>
     <div id="chat-container">
-        <chat class="connect-desk__chat"
-              task="<?= $task->id; ?>"
-              sender_id="<?= Yii::$app->user->id; ?>">
+        <chat class="connect-desk__chat" task="<?= $task->id; ?>">
         </chat>
     </div>
+    <?php endif; ?>
 </section>

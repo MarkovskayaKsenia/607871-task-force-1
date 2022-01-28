@@ -35,6 +35,7 @@ class MessagesController extends ActiveController
         $model = new Correspondence();
         $model->task_id = $data['task_id'];
         $model->message = $data['message'];
+
         $model->user_id = \Yii::$app->user->getId();
         if (!$model->save()) {
             throw new BadRequestHttpException();
@@ -50,4 +51,11 @@ class MessagesController extends ActiveController
             'is_mine' => true,
         ];
     }
+
+    /*public function checkAccess($action, $model = null, $params = [])
+    {
+        if ($action === 'create') {
+            if (\Yii::$app->user)
+        }
+    }*/
 }
