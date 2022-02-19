@@ -2681,3 +2681,11 @@ span.is-invalid {
 input.is-invalid {
   border-color: #FF116E;
 }
+
+.portfolio__preview-container {
+  display: flex;
+}
+
+.portfolio__preview {
+  margin-right: 10px;
+}
